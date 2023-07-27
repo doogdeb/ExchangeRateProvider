@@ -1,0 +1,24 @@
+﻿@model ExchangeRateProvider.ViewModels.ExchangeRateViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Exchange Rate Provider</h1>
+    <p>Powered by Czech National Bank.</p>
+</div>
+
+<table>
+    <tr>
+        <th>Currency</th>
+        <th>Rate</th>
+    </tr>
+    @foreach (var currency in Model.ExchangeRate!.ConversionRateModel)
+    {
+        <tr>
+            <td>@currency.CurrencyCodeName</td>
+            <td>@currency.CurrencyRate</td>
+        </tr>
+    }
+</table>

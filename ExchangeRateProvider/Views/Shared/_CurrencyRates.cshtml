@@ -1,0 +1,17 @@
+﻿@model ExchangeRateProvider.ViewModels.ExchangeRateViewModel
+
+<p>Below currencies were last updated @Model.ExchangeRate!.LastUpdateDate</p>
+<table>
+    <tr>
+        <th>Currency</th>
+        <th>Rate</th>
+    </tr>
+    @foreach (var currency in Model.ExchangeRate!.ConversionRateModel)
+    {
+        <tr>
+            <td>@currency.CurrencyCodeName</td>
+            <td>@currency.CurrencyRate</td>
+        </tr>
+    }
+</table>
+
