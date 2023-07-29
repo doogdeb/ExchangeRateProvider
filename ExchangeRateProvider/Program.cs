@@ -45,7 +45,7 @@ namespace ExchangeRateProvider
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
 
-            builder.Services.AddTransient<IExchangeRateProvider, Core.ExchangeRateProviders.ExchangeRateProvider>();
+            builder.Services.AddTransient<IExchangeRateProvider, CzechNationalBankExchangeRateProvider>();
            
             var app = builder.Build();
 
