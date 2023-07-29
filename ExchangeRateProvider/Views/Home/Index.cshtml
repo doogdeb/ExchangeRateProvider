@@ -14,11 +14,11 @@
         <th>Currency</th>
         <th>Rate</th>
     </tr>
-    @foreach (var currency in Model.ExchangeRate!.ConversionRateModel)
+    @foreach (var currency in Model.ExchangeRates!)
     {
         <tr>
-            <td>@currency.CurrencyCodeName</td>
-            <td>@currency.CurrencyRate</td>
+            <td>@currency.FormattedCurrency()</td>
+            <td>@currency.Value</td>
         </tr>
     }
 </table>

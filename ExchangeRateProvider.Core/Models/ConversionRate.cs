@@ -33,6 +33,6 @@ namespace ExchangeRateProvider.Core.Models
         public string CurrencyCode { get; set; }
 
         [JsonPropertyName("rate")]
-        public float Rate { get; set; }
+        public double Rate { get; set; }
     }
 }

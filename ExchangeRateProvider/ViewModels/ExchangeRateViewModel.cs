@@ -6,9 +6,9 @@ namespace ExchangeRateProvider.ViewModels
     {
         public ExchangeRateViewModel()
         {
-            ExchangeRate = new ExchangeRateModel();
+            ExchangeRates = new List<ExchangeRate>();
         }
-        public ExchangeRateModel? ExchangeRate { get; set; }
+        public IEnumerable<ExchangeRate> ExchangeRates { get; set; }
         
     }
 }

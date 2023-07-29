@@ -1,5 +1,6 @@
 using ExchangeRateProvider.Core.Apis;
-using ExchangeRateProvider.Core.Interactors;
+using ExchangeRateProvider.Core.ExchangeRateProviders;
+using ExchangeRateProvider.Core.Models;
 using ExchangeRateProvider.Core.Options;
 using ExchangeRateProvider.Infrastructure.Apis;
 
@@ -26,10 +27,26 @@ namespace ExchangeRateProvider
                 })
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
-            
-            builder.Services
-                .AddTransient<IExchangeRateInteractor, CzechNationalBankExchangeRateInteractor>();
-            
+
+            builder.Services.AddOptions<HomeControllerOptions>()
+                .Configure(opts =>
+                {
+                    var currencies = builder.Configuration.GetSection("Currencies").Get<List<string>>();
+                    opts.Currencies = currencies.Select(s => new Currency(s)).ToList();
+                })
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+            builder.Services.AddOptions<ExchangeRateProviderOptions>()
+                .Configure(opts =>
+                {
+                    opts.SourceCurrency = new Currency(builder.Configuration["SourceCurrency"]);
+                })
+                .ValidateDataAnnotations()
+                .ValidateOnStart();
+
+            builder.Services.AddTransient<IExchangeRateProvider, Core.ExchangeRateProviders.ExchangeRateProvider>();
+           
             var app = builder.Build();
 
             // Confige the HTTP request pipeline.
